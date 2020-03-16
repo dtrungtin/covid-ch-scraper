@@ -25,7 +25,7 @@ Apify.main(async () => {
         handlePageTimeoutSecs: 60,
 
         handlePageFunction: async ({ request, html, $ }) => {
-            console.log(`Processing ${request.url}...`);
+            log.info(`Processing ${request.url}...`);
 
             const data = {
                 sourceUrl,
@@ -65,11 +65,11 @@ Apify.main(async () => {
         },
 
         handleFailedRequestFunction: async ({ request }) => {
-            console.log(`Request ${request.url} failed twice.`);
+            log.info(`Request ${request.url} failed twice.`);
         },
     });
 
     await crawler.run();
 
-    console.log('Crawler finished.');
+    log.info('Crawler finished.');
 });
