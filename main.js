@@ -30,7 +30,7 @@ Apify.main(async () => {
             const data = {
                 sourceUrl,
                 lastUpdatedAtApify: moment().utc().second(0).millisecond(0).toISOString(),
-                readMe: "https://apify.com/dtrungtin/covid-switzerland",
+                readMe: "https://apify.com/dtrungtin/covid-ch",
             };
 
             const confirmedDateText = $('#content .row .main-content > div:nth-child(5) p:nth-child(3)').text();
