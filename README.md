@@ -1,5 +1,5 @@
 # Coronavirus stats in the Switzerland from official source
-Scraper gets an actual number of tested cases, number of confirmed cases and number of deaths in the Switzerland from https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/situation-schweiz-und-international.html.
+Gets an actual number of tested cases, number of confirmed cases and number of deaths by COVID-19 in the Switzerland from https://www.bag.admin.ch/bag/en/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/situation-schweiz-und-international.html.
 
 Latest data are available at this URL: https://api.apify.com/v2/key-value-stores/lDegAca820XgvjE0C/records/LATEST?disableRedirect=true.
 
