@@ -24,7 +24,7 @@ Apify.main(async () => {
         maxRequestRetries: 1,
         handlePageTimeoutSecs: 60,
 
-        handlePageFunction: async ({ request, html, $ }) => {
+        handlePageFunction: async ({ request, $ }) => {
             log.info(`Processing ${request.url}...`);
 
             const data = {
