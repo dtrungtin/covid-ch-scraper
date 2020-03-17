@@ -47,12 +47,12 @@ Apify.main(async () => {
 
             const numberOfCases = $('#content .row .main-content > div:nth-child(5) p:nth-child(4)').text();
             const [tested, confirmed] = numberOfCases.match(/(\d+)/g);
-            data.testedCases = tested;
-            data.confirmedCases = confirmed;
+            data.testedCases = parseInt(tested);
+            data.confirmedCases = parseInt(confirmed);
 
             const numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(6)').text();
             const [died] = numberOfDied.match(/(\d+)/g);
-            data.numberOfDeaths = died;
+            data.numberOfDeaths = parseInt(died);
 
             // Compare and save to history
             const latest = await kvStore.getValue(LATEST) || {};
