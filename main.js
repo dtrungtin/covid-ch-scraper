@@ -50,9 +50,15 @@ Apify.main(async () => {
             data.testedCases = parseInt(tested);
             data.confirmedCases = parseInt(confirmed);
 
-            const numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(6)').text();
-            const [died] = numberOfDied.match(/(\d+)/g);
-            data.numberOfDeaths = parseInt(died);
+            let numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(5)').text();
+            if (numberOfDied.match(/(\d+)/g)) {
+                const [died] = numberOfDied.match(/(\d+)/g);
+                data.numberOfDeaths = parseInt(died);
+            } else {
+                numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(6)').text();
+                const [died] = numberOfDied.match(/(\d+)/g);
+                data.numberOfDeaths = parseInt(died);
+            }
 
             // Compare and save to history
             const latest = await kvStore.getValue(LATEST) || {};
