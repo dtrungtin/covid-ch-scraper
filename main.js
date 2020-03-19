@@ -34,10 +34,18 @@ Apify.main(async () => {
             };
 
             const confirmedDateText = $('#content .row .main-content > div:nth-child(5) p:nth-child(3)').text();
-            const matchUpadatedAt = confirmedDateText.match(/(\d+).(\d+).(\d+), (\d+).(\d+) ([apm]+)/);
+            let matchUpadatedAt = confirmedDateText.match(/(\d+).(\d+).(\d+), (\d+).(\d+) ([apm]+)/);
+            if (!matchUpadatedAt) {
+                matchUpadatedAt = confirmedDateText.match(/(\d+).(\d+).(\d+), (\d+) ([apm]+)/);
+            }
 
-            if (matchUpadatedAt && matchUpadatedAt.length > 5) {
+            if (matchUpadatedAt && matchUpadatedAt.length > 6) {
                 const dateTimeStr = `${matchUpadatedAt[3]}.${matchUpadatedAt[2]}.${matchUpadatedAt[1]} ${matchUpadatedAt[4]}:${matchUpadatedAt[5]} ${matchUpadatedAt[6]}`;
+                const dateTime = moment.tz(dateTimeStr, "YYYY.MM.DD h:mm a", 'Europe/Zurich');
+               
+                data.lastUpdatedAtSource = dateTime.toISOString();
+            } else if (matchUpadatedAt && matchUpadatedAt.length > 5) {
+                const dateTimeStr = `${matchUpadatedAt[3]}.${matchUpadatedAt[2]}.${matchUpadatedAt[1]} ${matchUpadatedAt[4]}:00 ${matchUpadatedAt[5]}`;
                 const dateTime = moment.tz(dateTimeStr, "YYYY.MM.DD h:mm a", 'Europe/Zurich');
                
                 data.lastUpdatedAtSource = dateTime.toISOString();
