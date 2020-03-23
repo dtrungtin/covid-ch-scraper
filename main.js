@@ -33,7 +33,7 @@ Apify.main(async () => {
                 readMe: "https://apify.com/dtrungtin/covid-ch",
             };
 
-            const confirmedDateText = $('#content .row .main-content > div:nth-child(5) p:nth-child(3)').text();
+            const confirmedDateText = $('#content .row .main-content > div:nth-child(5) h3').text();
             let matchUpadatedAt = confirmedDateText.match(/(\d+).(\d+).(\d+), (\d+).(\d+) ([apm]+)/);
             if (!matchUpadatedAt) {
                 matchUpadatedAt = confirmedDateText.match(/(\d+).(\d+).(\d+), (\d+) ([apm]+)/);
@@ -53,17 +53,17 @@ Apify.main(async () => {
                 throw new Error('lastUpdatedAtSource not found');
             }
 
-            const numberOfCases = $('#content .row .main-content > div:nth-child(5) p:nth-child(4)').text();
+            const numberOfCases = $('#content .row .main-content > div:nth-child(5) p:nth-child(3)').text();
             const [tested, confirmed] = numberOfCases.match(/(\d+)/g);
             data.testedCases = parseInt(tested);
             data.confirmedCases = parseInt(confirmed);
 
-            let numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(5)').text();
+            let numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(4)').text();
             if (numberOfDied.match(/(\d+)/g)) {
                 const [died] = numberOfDied.match(/(\d+)/g);
                 data.numberOfDeaths = parseInt(died);
             } else {
-                numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(6)').text();
+                numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(5)').text();
                 const [died] = numberOfDied.match(/(\d+)/g);
                 data.numberOfDeaths = parseInt(died);
             }
