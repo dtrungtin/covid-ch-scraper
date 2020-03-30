@@ -54,21 +54,9 @@ Apify.main(async () => {
             }
 
             const numberOfCases = $('#content .row .main-content > div:nth-child(5) p:nth-child(3)').text();
-            const [confirmed, died] = numberOfCases.match(/(\d+)/g);
-            //data.testedCases = parseInt(tested);
-            data.testedCases = null;
-            data.confirmedCases = parseInt(confirmed);
-            data.numberOfDeaths = parseInt(died);
-
-            // let numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(4)').text();
-            // if (numberOfDied.match(/(\d+)/g)) {
-            //     const [died] = numberOfDied.match(/(\d+)/g);
-            //     data.numberOfDeaths = parseInt(died);
-            // } else {
-            //     numberOfDied = $('#content .row .main-content > div:nth-child(5) p:nth-child(5)').text();
-            //     const [died] = numberOfDied.match(/(\d+)/g);
-            //     data.numberOfDeaths = parseInt(died);
-            // }
+            const [confirmed, died] = numberOfCases.match(/([\d,]+)/g);
+            data.confirmedCases = parseInt(confirmed.replace(/,/, ''));
+            data.numberOfDeaths = parseInt(died.replace(/,/, ''));
 
             // Compare and save to history
             const latest = await kvStore.getValue(LATEST) || {};
